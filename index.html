@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Import Maps - Playground</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "browser-fs-access": "https://unpkg.com/browser-fs-access@0.33.0/dist/index.modern.js"
+        }
+      }
+    </script>
+</head>
+<body>
+    <h1>Importa Maps - Playground</h1>
+    <button>Select a text file</button>
+    <script type="module">
+        import {fileOpen} from 'browser-fs-access';
+
+        if (HTMLScriptElement.supports('importmap')) {
+            // The importmap feature is supported.
+            console.log("Supported!")
+        }
+
+        const button = document.querySelector('button');
+        button.addEventListener('click', async () => {
+            const file = await fileOpen({
+                mimeTypes: ['text/plain'],
+            });
+            console.log(await file.text());
+        });
+    </script>
+</body>
+</html>
